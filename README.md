@@ -2,7 +2,11 @@
 
 This project is to use a **variational quantum circuit (VQC)** for music playing, inspired by a logo of [QHack 2022](https://github.com/XanaduAI/QHack).
 
+![qusic](./images/qusic.png)
+<!--
 ![qusic](./images/music-gcf30a667d_1920.png)
+-->
+
 
 ## Chord Ansatz
 
@@ -10,24 +14,44 @@ A user may give a **melody**, while we wish a VQC would generate a matched **har
 One simplest possibility is the use of specific **chords** depending on **notes** of the melody.
 
 Let's consider 7-qubit quantum processor, where each qubit is associated with a piano string of C, D, E, F, G, A, and B notes at an octave 4.
-Given a melody note, the quantum measurement may produce a chord; e.g., C-major chord given C-note melody.
+Given a melody note, the quantum measurement may produce a chord; e.g., *C-major* chord given *C-note* melody.
 Such chord ansatz may be realized by controlled-nots (**CNOTs**) like the figure below.
 
 ![chord](./images/chord.png)
 
 Given limited number of qubits, some may need to compromise with *'wrapped'* chords.
 More qubits may be able to realize more variations (more octaves and flat/sharp strings).
-Note that each chord ansatz will interfere each other, and thus we need more tricks.
+
+Nevertheless, it should be noted that each chord ansatz will interfere each other, and thus we need more tricks.
 You may see the interference when running [chord.py](./chord.py) with more chord ansatz.
+```bash
+python chord.py
+c [1 1 1 1 0 0 1] # C-D-E-F-B ... anti-harmony
+d [1 1 0 1 0 0 0] 
+e [0 1 1 0 1 0 0]
+f [0 0 1 1 0 1 0]
+g [0 0 0 1 1 0 1]
+a [1 0 1 0 0 1 0] # Am ... OK
+b [0 1 0 1 0 0 1] # Bdm ... OK
+```
+Only exclusive chords in the end like a pair of Am and Bdm would work together.
+For example, we may pick exclusive chord ansats like:
+```bash
+python chord.py --chords CM Dm
+c [1 0 1 0 1 0 0] # CM ... OK
+d [0 1 0 1 0 1 0] # Dm ... OK
+e [0 0 1 0 0 0 0] # no harmony ... just melody of E-note.
+```
 
 
-## QAOA Ansatz
+## VQC Ansatz
 
 The above CNOTs chord ansatz has no variational parameters, and less interesting. 
 Can we make a cost Hamiltonian to realize chords, and then use [quantum approximate optimization algorithm (QAOA)](https://arxiv.org/abs/1411.4028)?
-TDB...
+In this project, we wish to design VQC to raise a *quantum pianist* or a *quantum guitarist*. 
+Let's solve it with **quantum machine learning (QML)** framework.
 
-## Prerequiste
+## Prerequisite
 
 We may use the package manager [pip](https://pip.pypa.io/en/stable/) for python=3.9.
 We use [Pennylane](https://pennylane.ai/).
@@ -39,7 +63,7 @@ pip install argparse
 Other versions should work.
 
 
-## Sound Synthesize
+## Sound Synthesis
 
 We first synthesize sounds, based on a submodule [Synthesizer_in_Python](https://github.com/joaocarvalhoopen/Synthesizer_in_Python).
 A wrapper script [synth.py](synth.py) to generate wav files in Sounds directory, e.g., as
@@ -62,7 +86,7 @@ You should hear *twinkle star*, otherwise revisit above.
 ![qiano](./images/piano-g43b83d891_1280.jpg)
 -->
 
-Under development.
+Under development. Coming soon.
 
 ## Usage
 
