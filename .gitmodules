@@ -1,0 +1,3 @@
+[submodule "Synthesizer_in_Python"]
+	path = Synthesizer_in_Python
+	url = https://github.com/joaocarvalhoopen/Synthesizer_in_Python.git
