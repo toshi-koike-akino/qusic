@@ -4,10 +4,28 @@ This project is to use a **variational quantum circuit (VQC)** for music playing
 
 ![qusic](./images/music-gcf30a667d_1920.png)
 
-## Methodology
+## Chord Ansatz
 
 A user may give a **melody**, while we wish a VQC would generate a matched **harmony**. 
 One simplest possibility is the use of specific **chords** depending on **notes** of the melody.
+
+Let's consider 7-qubit quantum processor, where each qubit is associated with a piano string of C, D, E, F, G, A, and B notes at an octave 4.
+Given a melody note, the quantum measurement may produce a chord; e.g., C-major chord given C-note melody.
+Such chord ansatz may be realized by controlled-nots (**CNOTs**) like the figure below.
+
+![chord](./images/chord.png)
+
+Given limited number of qubits, some may need to compromise with *'wrapped'* chords.
+More qubits may be able to realize more variations (more octaves and flat/sharp strings).
+Note that each chord ansatz will interfere each other, and thus we need more tricks.
+You may see the interference when running [chord.py](./chord.py) with more chord ansatz.
+
+
+## QAOA Ansatz
+
+The above CNOTs chord ansatz has no variational parameters, and less interesting. 
+Can we make a cost Hamiltonian to realize chords, and then use [quantum approximate optimization algorithm (QAOA)](https://arxiv.org/abs/1411.4028)?
+TDB...
 
 ## Prerequiste
 
@@ -28,6 +46,7 @@ A wrapper script [synth.py](synth.py) to generate wav files in Sounds directory,
 ```bash
 python synth.py --octaves 4 --notes C D E F G A B --sound piano acoustic
 ```
+We may hear a piano note like [C4.wav](./audios/C4.wav).
 
 Sound checking with [twinkle.py](twinkle.py) as:
 ```bash
@@ -43,10 +62,12 @@ You should hear *twinkle star*, otherwise revisit above.
 ![qiano](./images/piano-g43b83d891_1280.jpg)
 -->
 
+Under development.
+
 ## Usage
 
 ```bash
-
+??
 ```
 
 # q~~g~~uitar: Quantum Guitar
@@ -56,6 +77,7 @@ You should hear *twinkle star*, otherwise revisit above.
 ![quitar](./images/guitar-g9261592a2_1920.jpg)
 -->
 
+Under development.
 
 # License
 
