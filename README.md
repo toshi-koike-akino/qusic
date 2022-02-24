@@ -120,7 +120,7 @@ Our qusician-Charlie would visit us by calling as:
 python qusic.py --ansatz RandomLayers --layers 2 7
 ```
 
-Note that, without teaching them, they are just novice-level players because the variational parameters are random at beggining. 
+Note that, without teaching them, they are just novice-level players because the variational parameters are random at beginning. 
 Also note that the tarent depends on quantum ansatz and the number of layers.
 Let's introduce our q~~m~~aestro who may instruct them to play the piano.
 
@@ -195,9 +195,9 @@ After training, he looks like below:
  B: ───RZ(-0.384)─────────────────────────────────────────────────────────────┤ ⟨Z⟩ 
 ```
 
-## Concert
+## q~~c~~oncert: Quantum Concert
 
-Let's hear how our *qusician* Alice, Bob, and Charlie would play the piano.
+Let's listen to how our *qusician* Alice, Bob, and Charlie would play the piano.
 ... Coming soon.
 
 
