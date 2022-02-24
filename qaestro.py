@@ -68,9 +68,9 @@ def teach(args, student):
     wires = args.wires
     
     # cost to reduce miss-fingering
-    def miss_finger(weights):
+    def miss_finger(weights, **kwargs):
         # melody-line note given
-        note = np.random.choice(len(wires), size=2)[-1] # random choice of melody note (size=None, 1 not working?)
+        #note = np.random.choice(len(wires), size=2)[-1] # random choice of melody note (size=None, 1 not working?)
         melody = wires[note] # melody line note
         if args.verb: print('melody', note, melody)
         
@@ -100,9 +100,11 @@ def teach(args, student):
     # train loop
     weights = student.weights
     loss_all = list()
+    train = np.random.choice(len(wires), size=args.epoch) # random choice of melody note to train
+
     for epoch in tqdm(range(args.epoch), leave=True, desc='teaching'):
-        
-        weights, loss = teacher.step_and_cost(miss_finger, weights)
+        note = train[epoch]
+        weights, loss = teacher.step_and_cost(miss_finger, weights, note=note)
         #student.set_weights(weights)
 
         print(epoch, loss) #, weights, student.weights)

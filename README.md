@@ -175,6 +175,7 @@ python qaestro.py --ansatz StronglyEntanglingLayers --layers 7 7 --epoch 2000
 
 ## qusician-Charlie (RandomLayers):
 
+<!--
 Surprisingly, we found that our qusician-Charlie is more skillful as follows:
 ```bash
 python qaestro.py --ansatz RandomLayers --layers 2 7 --epoch 2000
@@ -194,6 +195,7 @@ After training, he looks like below:
  A: ───RZ(-0.249)──────RX(5.62e-07)───────────────────────────────────────────┤ ⟨Z⟩ 
  B: ───RZ(-0.384)─────────────────────────────────────────────────────────────┤ ⟨Z⟩ 
 ```
+-->
 
 ## q~~c~~oncert: Quantum Concert
 
