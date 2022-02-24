@@ -26,21 +26,21 @@ Nevertheless, it should be noted that each chord ansatz will interfere each othe
 You may see the interference when running [chord.py](./chord.py) with more chord ansatz.
 ```bash
 python chord.py
-c [1 1 1 1 0 0 1] # C-D-E-F-B ... anti-harmony
-d [1 1 0 1 0 0 0] 
-e [0 1 1 0 1 0 0]
-f [0 0 1 1 0 1 0]
-g [0 0 0 1 1 0 1]
-a [1 0 1 0 0 1 0] # Am ... OK
-b [0 1 0 1 0 0 1] # Bdm ... OK
+C [1 1 1 1 0 0 1] # C-D-E-F-B ... anti-harmony
+D [1 1 0 1 0 0 0] 
+E [0 1 1 0 1 0 0]
+F [0 0 1 1 0 1 0]
+G [0 0 0 1 1 0 1]
+A [1 0 1 0 0 1 0] # Am ... OK
+B [0 1 0 1 0 0 1] # Bdm ... OK
 ```
 Only exclusive chords in the end like a pair of Am and Bdm would work together.
 For example, we may pick exclusive chord ansats like:
 ```bash
 python chord.py --chords CM Dm
-c [1 0 1 0 1 0 0] # CM ... OK
-d [0 1 0 1 0 1 0] # Dm ... OK
-e [0 0 1 0 0 0 0] # no harmony ... just melody of E-note.
+C [1 0 1 0 1 0 0] # CM ... OK
+D [0 1 0 1 0 1 0] # Dm ... OK
+E [0 0 1 0 0 0 0] # no harmony ... just melody of E-note.
 ```
 
 
@@ -48,7 +48,8 @@ e [0 0 1 0 0 0 0] # no harmony ... just melody of E-note.
 
 The above CNOTs chord ansatz has no variational parameters, and less interesting. 
 Can we make a cost Hamiltonian to realize chords, and then use [quantum approximate optimization algorithm (QAOA)](https://arxiv.org/abs/1411.4028)?
-In this project, we wish to design VQC to raise a *quantum pianist* or a *quantum guitarist*. 
+
+In this project, we wish to design VQC to raise a *quantum pianist* or a *quantum guitarist* (hopefully with a passion to deviate from regular behaviors depending on his mood: i.e., quantum states/errors). 
 Let's solve it with **quantum machine learning (QML)** framework.
 
 ## Prerequisite
@@ -102,6 +103,15 @@ Under development. Coming soon.
 -->
 
 Under development.
+
+# Extensions
+
+Our *quantum musician* may consider if he feels good:
+- Volume
+- Tempo 
+- Arpeggio/Stroke
+- Trend of melody
+- ...
 
 # License
 

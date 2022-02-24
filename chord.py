@@ -5,7 +5,7 @@ import pennylane as qml
 import argparse
 
 def get_wires():
-    wires = ['c', 'd', 'e', 'f', 'g', 'a', 'b']
+    wires = ['C', 'D', 'E', 'F', 'G', 'A', 'B']
     return wires
 
 def get_device(wires, shots=1):
@@ -15,13 +15,13 @@ def get_device(wires, shots=1):
 def get_chords(chords=['CM', 'Dm', 'Em', 'FM', 'GM', 'Am', 'Bdm']):
     # harmony triplet
     harmony = {
-        'CM': ['c', 'e', 'g'], # CM
-        'Dm': ['d', 'f', 'a'], # Dm
-        'Em': ['e', 'g', 'b'], # Em
-        'FM': ['f', 'a', 'c'], # FM
-        'GM': ['g', 'b', 'd'], # GM
-        'Am': ['a', 'c', 'e'], # Am
-        'Bdm': ['b', 'd', 'f'], # Bdm
+        'CM': ['C', 'E', 'G'], # CM
+        'Dm': ['D', 'F', 'A'], # Dm
+        'Em': ['E', 'G', 'B'], # Em
+        'FM': ['F', 'A', 'C'], # FM
+        'GM': ['G', 'B', 'D'], # GM
+        'Am': ['A', 'C', 'E'], # Am
+        'Bdm': ['B', 'D', 'F'], # Bdm
     }
     triplets = list()
     for chord in chords:
@@ -38,13 +38,13 @@ def chord_ansatz(chords):
 
 def get_melody(note):
     melody = {
-        'c': [1,0,0,0,0,0,0],
-        'd': [0,1,0,0,0,0,0],
-        'e': [0,0,1,0,0,0,0],
-        'f': [0,0,0,1,0,0,0],
-        'g': [0,0,0,0,1,0,0],
-        'a': [0,0,0,0,0,1,0],
-        'b': [0,0,0,0,0,0,1],
+        'C': [1,0,0,0,0,0,0],
+        'D': [0,1,0,0,0,0,0],
+        'E': [0,0,1,0,0,0,0],
+        'F': [0,0,0,1,0,0,0],
+        'G': [0,0,0,0,1,0,0],
+        'A': [0,0,0,0,0,1,0],
+        'B': [0,0,0,0,0,0,1],
     }
     return melody[note]
 
