@@ -1,7 +1,6 @@
 # Toshiaki Koike-Akino, 2022
 # wrapping synthesizer in https://github.com/joaocarvalhoopen/Synthesizer_in_Python
 # creating wave files in Sounds/{sound}/{note}{octave}.wav
-import numpy as np
 import Synthesizer_in_Python.synthesizer as syn
 import os
 import argparse

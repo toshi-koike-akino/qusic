@@ -60,6 +60,7 @@ We use [Pennylane](https://pennylane.ai/).
 pip install pennylane=0.21.0
 pip install pygame=2.1.2
 pip install argparse
+pip install dill=0.3.4
 ```
 Other versions should work.
 
