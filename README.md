@@ -98,7 +98,7 @@ Let's invite three of our *qusicians*, who prefers a particular ansatzs:
 - qusician-Bob: [StronglyEntanglingLayers](https://pennylane.readthedocs.io/en/stable/code/api/pennylane.StronglyEntanglingLayers.html)
 - qusician-Charlie: [RandomLayers](https://pennylane.readthedocs.io/en/stable/code/api/pennylane.RandomLayers.html)
 
-A qusician plays the piano based on a melody line, by embedding with [BasisEmbedding](https://pennylane.readthedocs.io/en/stable/code/api/pennylane.BasisEmbedding.html).
+A *qusician* plays the piano based on a melody line, by embedding with [BasisEmbedding](https://pennylane.readthedocs.io/en/stable/code/api/pennylane.BasisEmbedding.html).
 Our qusician-Charlie may look like below:
 ```python
 wires = ['C', 'D', 'E', 'F', 'G', 'A', 'B'] # 1-octave strings
@@ -111,10 +111,10 @@ def qusician(melody):
     # think better harmony
     qml.RandomLayers(weights=skill, wires=wires)
     # type keyboard
-    return qml.sample(wires=wires) # hope 'CM' chord [1,0,1,0,1,0,0] for 'C'-note meholdy
+    return qml.sample(wires=wires) # hope 'CM' chord [1,0,1,0,1,0,0] for 'C'-note melody
 ```
 
-The qusician python class is introduced in [qusic.py](./qusic.py).
+The *qusician* python class is introduced in [qusic.py](./qusic.py).
 Our qusician-Charlie would visit us by calling as:
 ```python
 python qusic.py --ansatz RandomLayers --layers 2 7
@@ -128,7 +128,7 @@ Let's introduce our q~~m~~aestro who may instruct them to play the piano.
 
 Our *qaestro* teacher is introduced in [qaestro.py](./qaestro.py). 
 He may use a particular teaching style, like [AdamOptimizer](https://pennylane.readthedocs.io/en/stable/code/api/pennylane.AdamOptimizer.html).
-He tries to minimize students' *mis-fingering* (as a cost), where he asked how likely the students want to type keyboards given melody note, and jedges a penalty based on binary cross-entropy (BCE) loss, like below.
+He tries to minimize students' *mis-fingering* (as a cost), where he asked how likely the students want to type keyboards given melody note, and judges a penalty based on binary cross-entropy (BCE) loss, like below.
 ```python
 qaestro = qml.AdamOptimizer() # different teaching style is available
 
@@ -151,6 +151,7 @@ python qaestro.py --ansatz BasicEntanglerLayers --layers 2 7 --epoch 2000
 ```
 Her skill is improved with some deviation as below.
 ![basic2](./plots_demo/BasicEntanglerLayers_2_7.png)
+
 Unfortunately, even with 7-layer ansatz, her skill seems not that great:
 ```bash
 python qaestro.py --ansatz BasicEntanglerLayers --layers 7 7 --epoch 2000
@@ -164,6 +165,7 @@ Let's check how our quasician-Bob would do:
 python qaestro.py --ansatz StronglyEntanglingLayers --layers 2 7 --epoch 2000
 ```
 ![strong2](./plots_demo/StronglyEntanglingLayers_2_7.png)
+
 It seems that his skill is comparable to qusician-Alice.
 However, he seems more serious in the piano training if he uses 7-layer ansatz:
 ```bash
@@ -173,11 +175,12 @@ python qaestro.py --ansatz StronglyEntanglingLayers --layers 7 7 --epoch 2000
 
 ## qusician-Charlie (RandomLayers):
 
-Surprisingly, we found that our qusician-Charlie is more skillful as follows.
+Surprisingly, we found that our qusician-Charlie is more skillful as follows:
 ```bash
 python qaestro.py --ansatz RandomLayers --layers 2 7 --epoch 2000
 ```
 ![strong2](./plots_demo/RandomLayers_2_7.png)
+
 He achieves nearly zero penalty by qaestro's instruction (just with about 250 scoding)!
 
 After training, he looks like below:
@@ -194,7 +197,7 @@ After training, he looks like below:
 
 ## Concert
 
-Let's hear how our *qusician* Alice, Bob, and Charlie woudl play the piano.
+Let's hear how our *qusician* Alice, Bob, and Charlie would play the piano.
 ... Coming soon.
 
 
