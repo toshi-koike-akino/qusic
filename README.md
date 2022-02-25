@@ -81,7 +81,7 @@ Sound checking with [twinkle.py](twinkle.py) as:
 ```bash
 python twinkle.py --duration 0.1
 ```
-You should hear *twinkle star*, otherwise revisit above.
+You should hear *twinkle star* like [twinkle.mp4](./audios/twinkle.mp4), otherwise revisit above.
 
 # q~~p~~iano: Quantum Piano
 
@@ -238,6 +238,8 @@ How good are they?
 - *qusician*-Charlie: [RandomLayers_64_7.wav](./audios/RandomLayers_64_7.mp4); ... close but he still mis-fingers like Alice ...
 - careless *qusician*-Charlie: [RandomLayers_1_7.wav](./audios/RandomLayers_1_7.mp4); nevertheless, his playing with deeper insights (64-layer) was indeed better than his playing with shallow thought (1-layer), as he is typing same keys most of the time regardless of melody line.
 
+Not so great? Please do not blame them as our *qaestro* teacher does not play like a real maestro; [qaestro.mp4](./audios/qaestro.mp4). 
+And, they are probably better than the orignal melody alone [twinkle.mp4](./audios/twinkle.mp4).
 
 
 
@@ -269,8 +271,11 @@ Could be improved by adding more variants of arpeggio.
 In future, our *quantum musicians* may consider:
 - Volume
 - Tempo/Pitch
+- More chords
 - Trend of melody
+- Orchestra
 - Reinforcement learning with rewards by social audiences
+- Derivation of cost Hamiltonian for [QAOA](https://arxiv.org/abs/1411.4028)
 - ...
 
 # License

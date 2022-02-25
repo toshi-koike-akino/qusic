@@ -34,6 +34,9 @@ def qoncert_args(parser):
     parser.add_argument('--rate', default=44.1e3, type=float, help='sampling rate (Hz)')
     parser.add_argument('--duration', default=0.5, type=float, help='whole-note sound duration (sec)')
     parser.add_argument('--wav', default='play.wav', type=str, help='recording wave file')
+    parser.add_argument('--qaestro', action='store_true', help='qaestro mode: no mis-fingering')
+    parser.add_argument('--arpe', default='up', type=str,
+                        choices=['rand', 'down', 'up', 'cap', 'cup'], help='arpeggio style')
 
 # add args
 def add_args(parser):
@@ -56,9 +59,12 @@ def get_melody(model, score):
 
 # play
 def play(model, melody):
+    if args.verb: print('qaestro mode')
     played = list()
     for note in melody:
         typing = model(note, sample=True)
+        if args.qaestro: # no mis-fingering
+            typing = note + np.roll(note, 2) + np.roll(note, 4) # target
         played.append(typing)
     return np.stack(played)
     
@@ -74,12 +80,27 @@ def record(music, fname='play.npy', path=None):
 def synthesize(args, notes, octave=4, stroke=1):
     signals = list()
     for j in range(stroke):
+        # arpeggio
+        if args.arpe == 'up':
+            order = np.arange(len(notes))
+        elif args.arpe == 'down':
+            order = np.arange(len(notes))[::-1]
+        elif args.arpe == 'rand':
+            order = np.random.permutation(len(notes))
+        elif args.arpe == 'cap': # up-down
+            order = np.arange(len(notes)) if j % 2 == 0 else np.arange(len(notes))[::-1]
+        elif args.arpe == 'cup': # down-up
+            order = np.arange(len(notes))[::-1] if j % 2 == 0 else np.arange(len(notes))
+        if args.verb: print('stroke', j, order)
+            
         for k in range(len(notes)):
-            if notes[k] == 1:
-                note = args.wires[k]
+            key = order[k]
+            if notes[key] == 1:
+                note = args.wires[key]
                 signal = syn.generate(args.sound, note, octave, args.duration)
                 # stroke dealy
                 shift = (len(signals) + 1) * args.delay
+                if args.verb: print('shift', j, k, key, shift)
                 signal = np.roll(signal, shift)
                 #print('signal', signal.shape)
                 signals.append(signal)
@@ -99,7 +120,6 @@ def synthesize(args, notes, octave=4, stroke=1):
 # encore; play again to synthesize wave
 def encore(args, music, fname='play.wav'):
     melody, harmony = music
-    #harmony = melody + np.roll(melody, 2, axis=1) + np.roll(melody, 4, axis=1) # target
     wave = list()
     # synthesize one by one
     for left, right in zip(melody, harmony): # left-hand melody, right-hand harmony
