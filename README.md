@@ -239,7 +239,8 @@ How good are they?
 - careless *qusician*-Charlie: [RandomLayers_1_7.wav](./audios/RandomLayers_1_7.mp4); nevertheless, his playing with deeper insights (64-layer) was indeed better than his playing with shallow thought (1-layer), as he is typing same keys most of the time regardless of melody line.
 
 Not so great? Please do not blame them as our *qaestro* teacher does not play like a real maestro (qoncert.py --qaestro); [qaestro.mp4](./audios/qaestro.mp4). 
-And, they are probably better than the orignal melody alone [twinkle.mp4](./audios/twinkle.mp4).
+Also, they just spent a few minutes to learn how to play.
+In addition, their playing may be still better than the orignal melody alone [twinkle.mp4](./audios/twinkle.mp4).
 
 
 
