@@ -62,10 +62,13 @@ def teach(args, student):
     
     # chords to learn
     chords = chord.get_chords(chords=args.chords)
+    chords.append(['-']) # break
     if args.verb: print('chords to learn:', args.chords, chords)
     
     #
-    wires = args.wires
+    wires = args.wires.copy()
+    wires.append('-') # break
+    print(args.wires)
     
     # cost to reduce miss-fingering
     def miss_finger(weights, **kwargs):
