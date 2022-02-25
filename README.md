@@ -63,6 +63,7 @@ pip install pygame=2.1.2
 pip install argparse
 pip install dill=0.3.4
 pip install tqdm=4.62.3
+pip install matplotlib=3.5.1
 ```
 Other versions should work.
 

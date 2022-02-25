@@ -63,9 +63,13 @@ class Qusic():
         if self.verb: print('weights:', self.weights)
         
         # quantum node
+        self.init_qnodes()
+            
+    # init qnode
+    def init_qnodes(self):
         self.qnode = qml.QNode(self.circuit, device=self.dev)
         self.qnode_shots = qml.QNode(self.circuit, device=self.dev_shots)
-        if self.verb: print('qnode:', self.qnode)
+        if self.verb: print('init qnode:', self.qnode)
         
     # initialize weights
     def init_weights(self, shape):
@@ -73,7 +77,14 @@ class Qusic():
     
     # set 
     def set_weights(self, weights):
+        if self.verb: print('set weights:', weights)
         self.weights = weights
+        
+    # set wires
+    def set_wires(self, wires):
+        if self.verb: print('set wires', wires)
+        self.wires = wires
+        self.init_qnodes()        
     
     # qcircuit
     def circuit(self, inputs, sample=False):

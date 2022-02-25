@@ -2,3 +2,4 @@ pennylane
 pygame
 dill
 tqdm
+matplotlib

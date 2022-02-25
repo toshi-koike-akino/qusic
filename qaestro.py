@@ -15,6 +15,7 @@ def get_args():
     # general args
     parser.add_argument('--verb', action='store_true', help='verbose')
     parser.add_argument('--seed', default=1, type=int, help='seed for main')
+    parser.add_argument('--showfig', action='store_true', help='show figure')
 
     # add args
     add_args(parser)
@@ -120,7 +121,7 @@ def teach(args, student):
     return student, loss_all
         
 # plot
-def plot(loss, title='plot', path='plots'):
+def plot(loss, title='plot', path='plots', showfig=False):
     import matplotlib.pyplot as plt
     plt.plot(loss)
     plt.grid()
@@ -134,7 +135,7 @@ def plot(loss, title='plot', path='plots'):
         os.makedirs(path, exist_ok=True)
         fname = os.path.join(path, fname)        
     plt.savefig(fname)
-    plt.show()
+    if showfig: plt.show()
 
 def save(model, fname):
     #model.save(fname=fname, path='models') # not working :(
@@ -169,7 +170,7 @@ def main(args):
     
     # plot loss   
     fname = f'{args.ansatz}_{title}'
-    plot(loss, title=fname, path='plots')
+    plot(loss, title=fname, path='plots', showfig=args.showfig)
     
     return model
 
