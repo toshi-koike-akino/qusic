@@ -75,7 +75,7 @@ A wrapper script [synth.py](synth.py) to generate wav files in Sounds directory,
 ```bash
 python synth.py --octaves 4 --notes C D E F G A B --sound piano acoustic
 ```
-We may hear a piano note like [C4.wav](./audios/C4.mp4).
+We may hear a piano note like [C4.wav](./audios/C4.wav).
 
 Sound checking with [twinkle.py](twinkle.py) as:
 ```bash
@@ -150,6 +150,7 @@ Let's see how *qusician*-Alice would be trained by our *qaestro*:
 ```bash
 python qaestro.py --ansatz BasicEntanglerLayers --layers 2 7 --epoch 2000 --showfig
 ```
+It saves the learning trajectry figure in **plots/BasicEntanglerLayers_2_7.png** in default setting.
 Her skill is improved with large deviation as below.
 ![basic2](./plots_demo/BasicEntanglerLayers_2_7.png)
 
@@ -164,6 +165,7 @@ After training, she looks like below:
  A: ──RX(-2.15)──────────────────────────────────────────╰X─────────╭C──────────RX(-0.000427)──│──────────────────────────────────╰X──╭C──│───┤ ⟨Z⟩ 
  B: ──RX(8.41e-05)──────────────────────────────────────────────────╰X─────────────────────────╰C──RX(-0.00425)───────────────────────╰X──╰C──┤ ⟨Z⟩ 
  ```
+The trained model is saved in **models/BasicEntanglerLayers_2_7.pkl** in default.
 
 Unfortunately, even with more deep thinking (32-layer ansatz), her skill seems not that great:
 ```bash
@@ -223,8 +225,19 @@ After training, he looks like below:
 
 ## q~~c~~oncert: Quantum Concert
 
-Let's listen to how our *qusicians* Alice, Bob, and Charlie would play the piano.
-... Coming soon.
+Let's listen to how our *qusicians* Alice, Bob, and Charlie would play the piano for *twinkle star*, using [qoncert.py](./qoncert.py) as follows:
+```bash
+python qoncert.py --load modes/RandomLayers_2_7.pkl
+```
+It saves **play.npy** and **play.wav** in default.
+How good are they?
+- *qusician*-Alice: [BasicEntanglerLayers_64_7.wav](./audios/BasicEntanglerLayers_64_7.mp4); umm, she mis-fingers at a break.
+- *qusician*-Bob: [StronglyEntanglingLayers_64_7.wav](./audios/StronglyEntanglingLayers_64_7.mp4); he sounds good, at least knows when not to type keys at break.
+- pre-training *qusician*-Bob: [StronglyEntanglingLayers_64_7_epoch0.wav](./audios/StronglyEntanglingLayers_64_7_epoch0.mp4); his playing was indeed improved when comparing with his playing before training with *qaestro*.
+- *qusician*-Charlie: [RandomLayers_64_7.wav](./audios/RandomLayers_64_7.mp4); ... close but he still mis-fingers like Alice ...
+- careless *qusician*-Charlie: [RandomLayers_1_7.wav](./audios/RandomLayers_1_7.mp4); nevertheless, his playing with deeper insights (64-layer) was indeed better than his playing with shallow thought (1-layer), as he is typing same keys most of the time regardless of melody line.
+
+
 
 
 # q~~g~~uitar: Quantum Guitar
