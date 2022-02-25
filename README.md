@@ -273,7 +273,7 @@ Could be improved by adding more variants of arpeggio.
 It is straightforward to use a real **quantum processing unit (QPU)** for testing our *qusic*.
 For example, we may use [IBM Q Experience](https://pennylaneqiskit.readthedocs.io/en/latest/devices/ibmq.html).
 You may specify the account token via [Pennylane configulation file](https://pennylane.readthedocs.io/en/latest/introduction/configuration.html), and a scpecific backend of real QPU, such as 'ibmq_london'.
-To run our [vqar.py](./vqar.py) on a real quantum computer, you just need to change the device as follows:
+To run our [qusic.py](./qusic.py) on a real quantum computer, you just need to change the device as follows:
 ```bash
 pip install pennylane-qiskit=0.21.0 # qiskit plugin
 python qusic.py --dev qiskit.ibmq
