@@ -19,21 +19,26 @@ def get_args():
     return parser.parse_args()
 
 # twinkle score
-def get_score():
+def get_score(octave=4):
     twinkle = [
-        'C4','C4','G4','G4','A4','A4','G4','G4',
-        'F4','F4','E4','E4','D4','D4','C4','C4',
-        'G4','G4','F4','F4','E4','E4','D4','D4',
-        'G4','G4','F4','F4','E4','E4','D4','D4',
-        'C4','C4','G4','G4','A4','A4','G4','G4',
-        'F4','F4','E4','E4','D4','D4','C4','C4',
+        'C','C','G','G','A','A','G','-', 
+        'F','F','E','E','D','D','C','-',
+        'G','G','F','F','E','E','D','-',
+        'G','G','F','F','E','E','D','-',
+        'C','C','G','G','A','A','G','-',
+        'F','F','E','E','D','D','C','-',
         ]
+    if octave > 0:
+        twinkle = [f'{note}{octave}' for note in twinkle]
     return twinkle    
 
 # play note
 def play_notes(notePath, duration):
     #time.sleep(duration)
-    pg.mixer.Sound(notePath).play()
+    try:
+        pg.mixer.Sound(notePath).play()
+    except:
+        pass # do nothing if no sound files
     time.sleep(duration)
     #print(notePath)
 
