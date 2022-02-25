@@ -270,7 +270,7 @@ Could be improved by adding more variants of arpeggio.
 # Real QPU Validation
 
 ## IBM QPU
-It is straightforward to use a real **quantum computing processor (QPU)** for testing our VQAR.
+It is straightforward to use a real **quantum processing unit (QPU)** for testing our *qusic*.
 For example, we may use [IBM Q Experience](https://pennylaneqiskit.readthedocs.io/en/latest/devices/ibmq.html).
 You may specify the account token via [Pennylane configulation file](https://pennylane.readthedocs.io/en/latest/introduction/configuration.html), and a scpecific backend of real QPU, such as 'ibmq_london'.
 To run our [vqar.py](./vqar.py) on a real quantum computer, you just need to change the device as follows:
