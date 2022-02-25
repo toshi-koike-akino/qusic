@@ -279,8 +279,11 @@ In future, our *quantum musicians* may consider:
 - Derivation of cost Hamiltonian for [QAOA](https://arxiv.org/abs/1411.4028)
 - ...
 
+![slides](./images/qusic.gif)
+
 # License
 
 [MIT](https://choosealicense.com/licenses/mit/).
 Copyright (c) 2022 Toshi Koike-Akino.
 This project is provided 'as-is', without warranty of any kind. In no event shall the authors be liable for any claims, damages, or other such variants.
+
