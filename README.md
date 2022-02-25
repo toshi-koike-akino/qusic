@@ -95,9 +95,9 @@ You should hear *twinkle star*, otherwise revisit above.
 ## q~~m~~usician: Quantum Musician Ansatz
 
 Let's invite three of our *qusicians*, who prefers a particular ansatzs:
-- qusician-Alice: [BasicEntanglerLayers](https://pennylane.readthedocs.io/en/stable/code/api/pennylane.BasicEntanglerLayers.html)
-- qusician-Bob: [StronglyEntanglingLayers](https://pennylane.readthedocs.io/en/stable/code/api/pennylane.StronglyEntanglingLayers.html)
-- qusician-Charlie: [RandomLayers](https://pennylane.readthedocs.io/en/stable/code/api/pennylane.RandomLayers.html)
+- *qusician*-Alice: [BasicEntanglerLayers](https://pennylane.readthedocs.io/en/stable/code/api/pennylane.BasicEntanglerLayers.html)
+- *qusician*-Bob: [StronglyEntanglingLayers](https://pennylane.readthedocs.io/en/stable/code/api/pennylane.StronglyEntanglingLayers.html)
+- *qusician*-Charlie: [RandomLayers](https://pennylane.readthedocs.io/en/stable/code/api/pennylane.RandomLayers.html)
 
 A *qusician* plays the piano based on a melody line, by embedding with [BasisEmbedding](https://pennylane.readthedocs.io/en/stable/code/api/pennylane.BasisEmbedding.html).
 Our qusician-Charlie may look like below:
@@ -116,16 +116,16 @@ def qusician(melody):
 ```
 
 The *qusician* python class is introduced in [qusic.py](./qusic.py).
-Our qusician-Charlie would visit us by calling as:
+Our *qusician*-Charlie would visit us by calling as:
 ```python
 python qusic.py --ansatz RandomLayers --layers 2 7
 ```
 
 Note that, without teaching them, they are just novice-level players because the variational parameters are random at beginning. 
-Also note that the tarent depends on quantum ansatz and the number of layers.
+Also note that the tarent depends on how he/she thinks (i.e., quantum ansatz) and how deep he/she thinks (i.e., the number of quantum layers).
 Let's introduce our q~~m~~aestro who may instruct them to play the piano.
 
-## q~~m~~astro: Quantum Maestro Teacher
+## q~~m~~aestro: Quantum Maestro Teacher
 
 Our *qaestro* teacher is introduced in [qaestro.py](./qaestro.py). 
 He may use a particular teaching style, like [AdamOptimizer](https://pennylane.readthedocs.io/en/stable/code/api/pennylane.AdamOptimizer.html).
@@ -144,57 +144,80 @@ weights = qaestro.step(mis_finger, weights) # qaestro's guide
 
 ## Teaching Perforamnce
 
-### qusician-Alice (BasicEntanglerLayers):
+### q~~m~~usician-Alice (BasicEntanglerLayers):
 
-Let's see how qusician-Alice would be trained by our qaestro:
+Let's see how *qusician*-Alice would be trained by our qaestro:
 ```bash
-python qaestro.py --ansatz BasicEntanglerLayers --layers 2 7 --epoch 2000
+python qaestro.py --ansatz BasicEntanglerLayers --layers 2 7 --epoch 2000 --showfig
 ```
-Her skill is improved with some deviation as below.
+Her skill is improved with large deviation as below.
 ![basic2](./plots_demo/BasicEntanglerLayers_2_7.png)
 
-Unfortunately, even with 7-layer ansatz, her skill seems not that great:
+After training, she looks like below:
+```python
+>> model.draw()
+ C: ──RX(-6.88e-06)──╭C────────────────────────────────────────────────────────────────────────╭X──RX(-0.000264)──╭C──────────────────────╭X──┤ ⟨Z⟩ 
+ D: ──RX(1.09e-05)───╰X──╭C───RX(2.09e-05)─────────────────────────────────────────────────────│──────────────────╰X──╭C──────────────────│───┤ ⟨Z⟩ 
+ E: ──RX(-1.56)──────────╰X──╭C──────────────RX(-0.853)────────────────────────────────────────│──────────────────────╰X──╭C──────────────│───┤ ⟨Z⟩ 
+ F: ──RX(-1.3)───────────────╰X─────────────╭C────────────RX(1.66)─────────────────────────────│──────────────────────────╰X──╭C──────────│───┤ ⟨Z⟩ 
+ G: ──RX(1.36)──────────────────────────────╰X───────────╭C──────────RX(-2.37)─────────────────│──────────────────────────────╰X──╭C──────│───┤ ⟨Z⟩ 
+ A: ──RX(-2.15)──────────────────────────────────────────╰X─────────╭C──────────RX(-0.000427)──│──────────────────────────────────╰X──╭C──│───┤ ⟨Z⟩ 
+ B: ──RX(8.41e-05)──────────────────────────────────────────────────╰X─────────────────────────╰C──RX(-0.00425)───────────────────────╰X──╰C──┤ ⟨Z⟩ 
+ ```
+
+Unfortunately, even with more deep thinking (32-layer ansatz), her skill seems not that great:
 ```bash
-python qaestro.py --ansatz BasicEntanglerLayers --layers 7 7 --epoch 2000
+python qaestro.py --ansatz BasicEntanglerLayers --layers 32 7 --epoch 2000 --showfig
 ```
-![basic7](./plots_demo/BasicEntanglerLayers_7_7.png)
+![basic32](./plots_demo/BasicEntanglerLayers_32_7.png)
 
-### qusician-Bob (StronglyEntanglingLayers):
+### q~~m~~usician-Bob (StronglyEntanglingLayers):
 
-Let's check how our quasician-Bob would do:
+Let's check how our *quasician*-Bob would do:
 ```bash
-python qaestro.py --ansatz StronglyEntanglingLayers --layers 2 7 --epoch 2000
+python qaestro.py --ansatz StronglyEntanglingLayers --layers 2 7 --epoch 2000 --showfig
 ```
 ![strong2](./plots_demo/StronglyEntanglingLayers_2_7.png)
 
-It seems that his skill is comparable to qusician-Alice.
-However, he seems more serious in the piano training if he uses 7-layer ansatz:
+It seems that his skill is comparable to *qusician*-Alice.
+However, he seems more serious in the piano training if he uses deeper insights with 32-layer ansatz:
 ```bash
-python qaestro.py --ansatz StronglyEntanglingLayers --layers 7 7 --epoch 2000
+python qaestro.py --ansatz StronglyEntanglingLayers --layers 32 7 --epoch 2000 --showfig
 ```
-![strong7](./plots_demo/StronglyEntanglingLayers_7_7.png)
+![strong32](./plots_demo/StronglyEntanglingLayers_32_7.png)
 
-## qusician-Charlie (RandomLayers):
+His playing looks more stable with less scolding by *qaestro*.
+Note that [StronglyEntanglingLayers](https://pennylane.readthedocs.io/en/stable/code/api/pennylane.StronglyEntanglingLayers.html) have three-fold more variational parameters per layer than [BasicEntanglerLayers](https://pennylane.readthedocs.io/en/stable/code/api/pennylane.BasicEntanglerLayers.html).
+
+
+## q~~m~~usician-Charlie (RandomLayers):
+
+How skillful is our *qusician*-Charlie?
+```bash
+python qaestro.py --ansatz RandomLayers --layers 2 7 --epoch 2000 --showfig
+```
+![rand2](./plots_demo/RandomLayers_2_7.png)
+
+His playing seems awful and receives a lot of penalty by *qaestro*.
+However, we found that he would be more serious in the piano training if he considers deeper insights with 32-layer ansatz:
+```bash
+python qaestro.py --ansatz RandomLayers --layers 32 7 --epoch 2000 --showfig
+```
+![rand32](./plots_demo/RandomLayers_32_7.png)
+
+Then, he may be more skillful than *qusician*-Alice, while the number of variational parameters is equivalent.
 
 <!--
-Surprisingly, we found that our qusician-Charlie is more skillful as follows:
-```bash
-python qaestro.py --ansatz RandomLayers --layers 2 7 --epoch 2000
-```
-![strong2](./plots_demo/RandomLayers_2_7.png)
-
-He achieves nearly zero penalty by qaestro's instruction (just with about 250 scoding)!
-
 After training, he looks like below:
 ```python
 >> model.draw()
- C: ──╭C───────────────RZ(-0.528)─────────────────────────────────────────────┤ ⟨Z⟩ 
- D: ──╰X───────────────RY(-4.09e-07)──RZ(-3.11)────────────╭X──RZ(1.46)───────┤ ⟨Z⟩ 
- E: ───────────────╭X──RY(0.323)──────RY(1.2)────RY(-1.3)──│───RY(-0.223)─────┤ ⟨Z⟩ 
- F: ───RX(3.14)────│───RZ(-1.57)───────────────────────────╰C──RY(-5.76e-06)──┤ ⟨Z⟩ 
- G: ───────────────╰C─────────────────────────────────────────────────────────┤ ⟨Z⟩ 
- A: ───RZ(-0.249)──────RX(5.62e-07)───────────────────────────────────────────┤ ⟨Z⟩ 
- B: ───RZ(-0.384)─────────────────────────────────────────────────────────────┤ ⟨Z⟩ 
+ C: ──╭C───────────────RZ(-0.528)──RY(0.252)──RY(1.33)─────────────────────────────────────────────────────────────────────────────╭C───────────────────────╭C───────────╭X──RZ(0.293)─────RY(0.00413)──╭C──────────────────────────────────────────────╭X───RX(0.00563)───RY(-1.59)──────────────╭X──RY(0.503)───RY(0.817)─────────────────────────────────────────╭X──────────────╭C───────────────────────────────────────────────╭X───RY(-0.207)─────────────╭C──RX(1.07)────RX(0.5)─────RZ(-0.174)───────────RY(-0.133)──RZ(0.169)─────────────────────────────────────────────────────┤ ⟨Z⟩ 
+ D: ──╰X───────────────RY(-1.58)───RZ(-3.13)─────────────╭X──RZ(0.591)──────────────╭X─────────────╭X─────────────╭C──RY(0.00162)──╰X───────────────────────│────────────╰C──RZ(-0.0107)───RX(-1.64)────│───────────────────────────────────────────────│───╭X─────────────RY(1.2)────RZ(1.12)────│───RY(0.742)──────────────────╭C─────────────────╭C──RY(0.681)───│───────────────│─────────────╭C──────────────────╭C──RY(-1.23)──│───╭X───────────RX(-1.21)──│───RY(0.727)───RZ(1.01)────────────────────╭X───RZ(0.151)───RY(0.0354)────RX(-0.675)─────RY(1.86)───RX(-1.19)──RY(0.649)──┤ ⟨Z⟩ 
+ E: ───────────────╭X──RY(1.32)────RY(2.2)────RY(-0.31)──│───RY(0.77)────RZ(-1.51)──│───RZ(0.731)──│──────────────│─────────────────────────────────────────│────────────╭C──RZ(-0.681)───╭C────────────│──────────────────╭X──RX(1.56)─────RZ(-0.329)──│───╰C────────────╭X──────────────────────│──────────────────────────╭C──│───RX(0.775)──────│───RZ(0.4)─────│───RX(0.812)───│───RZ(1.23)──│───────────────╭X──│───RX(0.681)──│───│───────────────────────╰X──RY(0.497)───RY(-0.532)──────────────╭C──│────RZ(0.626)───RY(1.07)──────RZ(1.53)───────RX(-2.07)────────────────────────┤ ⟨Z⟩ 
+ F: ───RX(1.56)────│───RZ(-1.59)─────────────────────────╰C──RY(-0.183)──RY(0.181)──│───RX(-1.99)──│───RX(-2.26)──│───RZ(2.58)──────────────────────────────│────────────│────────────────│─────────────│──────────────────│────────────────────────────│─────────────────│───────────────────────╰C──RZ(0.54)───────────────│───│──────────────╭X──│───RX(-0.945)──│───RY(-1.56)───│───RX(1.04)──│───RX(2.09)────│───│──────────────│───╰C───────────RZ(0.313)──────────────────────────────────────────│───│───╭X───────────RZ(-0.0744)───RY(-0.00282)───RZ(0.594)────────────────────────┤ ⟨Z⟩ 
+ G: ───────────────╰C───────────────────────────────────────────────────────────────╰C─────────────│──────────────│─────────────────────────────╭C──────────╰X───────────╰X──RX(-1.54)────│─────────────╰X─────────────╭X──│────────────────────────────│───╭X────────────╰C──────────RZ(0.0243)──────RZ(-0.448)──RX(1.52)───│───│───RY(1.15)───│───│───────────────│───────────────│─────────────│───────────────╰C──│───RY(0.773)──│────RZ(-0.192)──RX(0.379)──────RZ(-0.623)──RY(0.801)───RY(-0.213)──│───│───╰C───────────RX(-0.0304)───RZ(0.315)───────────────────────────────────────┤ ⟨Z⟩ 
+ A: ───RZ(-0.249)──────RX(-2.22)───────────────────────────────────────────────────────────────────╰C──RX(0.746)──│───RY(-0.828)────RY(-1.05)───╰X───────────RX(0.0455)──╭C───────────────│────────────────────────────╰C──│───RX(0.00595)──────────────╰C──╰C─────────────RX(1.61)───RZ(0.0447)──────RX(0.503)──────────────╰X──│──────────────│───╰X──RX(1.2)─────│───RY(-0.639)──│───RX(1.75)──│───RY(-0.833)──────│───RZ(-2.41)──│────RY(0.876)──────────────────────────────────────────────────────│───╰C───RY(0.778)───────────────────────────────╭X────────────────────────────────┤ ⟨Z⟩ 
+ B: ───RZ(-0.384)─────────────────────────────────────────────────────────────────────────────────────────────────╰X──RZ(0.364)─────RZ(-0.903)───RZ(-1.15)───────────────╰X──RY(0.00567)──╰X─────────────RY(-0.00778)──────╰C──RZ(-1.52)─────────────────────────────────────────────────────────────────────────────────────────╰X─────────────╰C──────────────────╰C──────────────╰X────────────╰X──────────────────╰X─────────────╰C──────────────────────────────────────────────────────────────────╰X───────RY(0.743)───RX(-0.00879)──RZ(-0.00567)──╰C──────────RY(1.6)───────────────┤ ⟨Z⟩ 
 ```
 -->
 
