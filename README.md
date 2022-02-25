@@ -51,12 +51,12 @@ The above CNOTs chord ansatz has no variational parameters, and less interesting
 Can we make a cost Hamiltonian to realize chords, and then use [quantum approximate optimization algorithm (QAOA)](https://arxiv.org/abs/1411.4028)?
 -->
 In this project, we wish to design VQC to raise a *quantum pianist* or a *quantum guitarist* (hopefully with a passion to deviate from regular behaviors depending on his mood: i.e., quantum states/errors). 
-Let's solve it with **quantum machine learning (QML)** framework.
+Let's solve it with [**quantum machine learning (QML)**](https://pennylane.ai/qml/) framework.
 
 ## Prerequisite
 
 We may use the package manager [pip](https://pip.pypa.io/en/stable/) for python=3.9.
-We use [Pennylane](https://pennylane.ai/).
+We use [Pennylane](https://pennylane.ai/) for QML.
 ```bash
 pip install pennylane=0.21.0
 pip install pygame=2.1.2
@@ -70,14 +70,14 @@ Other versions should work.
 
 ## Sound Synthesis
 
-We first synthesize sounds, based on a submodule [Synthesizer_in_Python](https://github.com/joaocarvalhoopen/Synthesizer_in_Python).
-A wrapper script [synth.py](synth.py) to generate wav files in Sounds directory, e.g., as
+We first synthesize sounds, based on a submodule [Synthesizer_in_Python](https://github.com/joaocarvalhoopen/Synthesizer_in_Python), licensec under [MIT](https://choosealicense.com/licenses/mit/).
+A wrapper script [synth.py](synth.py) is to generate wav files in Sounds directory, e.g., for piano and guitar sounds as
 ```bash
 python synth.py --octaves 4 --notes C D E F G A B --sound piano acoustic
 ```
 We may hear a piano note like [C4.wav](./audios/C4.wav).
 
-Sound checking with [twinkle.py](twinkle.py) as:
+The synthesized sound may be checked with [twinkle.py](twinkle.py) as:
 ```bash
 python twinkle.py --duration 0.1
 ```
@@ -100,46 +100,46 @@ Let's invite three of our *qusicians*, who prefers a particular ansatzs:
 - *qusician*-Charlie: [RandomLayers](https://pennylane.readthedocs.io/en/stable/code/api/pennylane.RandomLayers.html)
 
 A *qusician* plays the piano based on a melody line, by embedding with [BasisEmbedding](https://pennylane.readthedocs.io/en/stable/code/api/pennylane.BasisEmbedding.html).
-Our qusician-Charlie may look like below:
+Our *qusician*-Charlie may look like below:
 ```python
 wires = ['C', 'D', 'E', 'F', 'G', 'A', 'B'] # 1-octave strings
-skill = np.random.randn(layer, 7, requires_grad=True) # skill weights
+insights = np.random.randn(layer, 7, requires_grad=True) # variatinal param weights
 
 @qml.device(device, wires=wires, shots=1)
 def qusician(melody):
     # melody line given; 'C'-note for [1,0,0,0,0,0,0]
     qml.BasisEmbedding(features=melody, wires=wires)
     # think better harmony
-    qml.RandomLayers(weights=skill, wires=wires)
+    qml.RandomLayers(weights=insights, wires=wires)
     # type keyboard
     return qml.sample(wires=wires) # hope 'CM' chord [1,0,1,0,1,0,0] for 'C'-note melody
 ```
 
 The *qusician* python class is introduced in [qusic.py](./qusic.py).
-Our *qusician*-Charlie would visit us by calling as:
+Our *qusician*-Charlie (with 2-layer insights) would visit us by calling as:
 ```python
 python qusic.py --ansatz RandomLayers --layers 2 7
 ```
 
 Note that, without teaching them, they are just novice-level players because the variational parameters are random at beginning. 
-Also note that the tarent depends on how he/she thinks (i.e., quantum ansatz) and how deep he/she thinks (i.e., the number of quantum layers).
-Let's introduce our q~~m~~aestro who may instruct them to play the piano.
+Also note that the tarent depends on how he/she thinks (i.e., quantum ansatz) and how deep his/her insights are (i.e., the number of quantum layers).
+Let's introduce our *q~~m~~aestro* who may instruct them to play the piano.
 
 ## q~~m~~aestro: Quantum Maestro Teacher
 
 Our *qaestro* teacher is introduced in [qaestro.py](./qaestro.py). 
 He may use a particular teaching style, like [AdamOptimizer](https://pennylane.readthedocs.io/en/stable/code/api/pennylane.AdamOptimizer.html).
-He tries to minimize students' *mis-fingering* (as a cost), where he asked how likely the students want to type keyboards given melody note, and judges a penalty based on binary cross-entropy (BCE) loss, like below.
+He tries to minimize students' *mis-fingering* (as a cost), where he asked how likely the students want to type keyboards given melody note, and judges a penalty, e.g., based on binary cross-entropy (BCE) loss, like below.
 ```python
 qaestro = qml.AdamOptimizer() # different teaching style is available
 
-def mis_finger(weights):
+def mis_finger(insights):
     melogy = np.random.choice(wires) # melody note given
-    typing = qusician(melody) # qusician answers melody typing
+    typing = qusician(melody, insights) # qusician answers melody typing
     harmony = chords[melody] # target harmony
     penalty = BCE(typing, harmony) # how much close to the target
     return penalty
-weights = qaestro.step(mis_finger, weights) # qaestro's guide
+insights = qaestro.step(mis_finger, insights) # qaestro's guide
 ```
 
 ## Teaching Perforamnce
@@ -234,11 +234,11 @@ It saves **play.npy** and **play.wav** in default.
 How good are they?
 - *qusician*-Alice: [BasicEntanglerLayers_64_7.wav](./audios/BasicEntanglerLayers_64_7.mp4); umm, she mis-fingers at a break.
 - *qusician*-Bob: [StronglyEntanglingLayers_64_7.wav](./audios/StronglyEntanglingLayers_64_7.mp4); he sounds good, at least knows when not to type keys at break.
-- pre-training *qusician*-Bob: [StronglyEntanglingLayers_64_7_epoch0.wav](./audios/StronglyEntanglingLayers_64_7_epoch0.mp4); his playing was indeed improved when comparing with his playing before training with *qaestro*.
+- pre-training *qusician*-Bob: [StronglyEntanglingLayers_64_7_epoch0.wav](./audios/StronglyEntanglingLayers_64_7_epoch0.mp4); his playing was indeed improved when comparing with his past playing before *qaestro*'s instruction.
 - *qusician*-Charlie: [RandomLayers_64_7.wav](./audios/RandomLayers_64_7.mp4); ... close but he still mis-fingers like Alice ...
 - careless *qusician*-Charlie: [RandomLayers_1_7.wav](./audios/RandomLayers_1_7.mp4); nevertheless, his playing with deeper insights (64-layer) was indeed better than his playing with shallow thought (1-layer), as he is typing same keys most of the time regardless of melody line.
 
-Not so great? Please do not blame them as our *qaestro* teacher does not play like a real maestro; [qaestro.mp4](./audios/qaestro.mp4). 
+Not so great? Please do not blame them as our *qaestro* teacher does not play like a real maestro (qoncert.py --qaestro); [qaestro.mp4](./audios/qaestro.mp4). 
 And, they are probably better than the orignal melody alone [twinkle.mp4](./audios/twinkle.mp4).
 
 
@@ -271,7 +271,7 @@ Could be improved by adding more variants of arpeggio.
 In future, our *quantum musicians* may consider:
 - Volume
 - Tempo/Pitch
-- More chords
+- More chords/more strings
 - Trend of melody
 - Orchestra
 - Reinforcement learning with rewards by social audiences
