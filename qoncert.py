@@ -27,6 +27,7 @@ def qoncert_args(parser):
     parser.add_argument('--record', default='play.npy', type=str, help='recording numpy file')
     parser.add_argument('--volume', default=0.8, type=float, help='harmony volume relative to melody')
     parser.add_argument('--delay', default=100, type=int, help='harmony delay')
+    parser.add_argument('--stroke', default=1, type=int, help='how many strokes')
     # synthesis
     parser.add_argument('--sound', default='piano', choices=['piano', 'organ', 'acoustic', 'edm'],
                         type=str, help='instrument sound type')
@@ -70,21 +71,22 @@ def record(music, fname='play.npy', path=None):
     np.save(fname, music)
     #melody, played = np.load('play.npy')
 
-def synthesize(args, notes, octave=4):
+def synthesize(args, notes, octave=4, stroke=1):
     signals = list()
-    for k in range(len(notes)):
-        if notes[k] == 1:
-            note = args.wires[k]
-            signal = syn.generate(args.sound, note, octave, args.duration)
-            # stroke dealy
-            shift = (len(signals) + 1) * args.delay
-            signal = np.roll(signal, shift)
-            #print('signal', signal.shape)
-            signals.append(signal)
-            
+    for j in range(stroke):
+        for k in range(len(notes)):
+            if notes[k] == 1:
+                note = args.wires[k]
+                signal = syn.generate(args.sound, note, octave, args.duration)
+                # stroke dealy
+                shift = (len(signals) + 1) * args.delay
+                signal = np.roll(signal, shift)
+                #print('signal', signal.shape)
+                signals.append(signal)
+                
     if len(signals) == 0: # break
         signal = syn.generate(args.sound, 'C', octave, args.duration)
-        signals.append(signal * 0.0)
+        signals.append(signal * 0.0)        
         
     signals = np.vstack(signals)
     #print('signals', signals.shape)
@@ -103,7 +105,7 @@ def encore(args, music, fname='play.wav'):
     for left, right in zip(melody, harmony): # left-hand melody, right-hand harmony
         if args.verb: print('left/right', left, right)
         L = synthesize(args, left, octave=args.melody) # melody play
-        R = synthesize(args, right, octave=args.harmony) # harmony play
+        R = synthesize(args, right, octave=args.harmony, stroke=args.stroke) # harmony play
         signal = (L + R * args.volume) / (1.0 + args.volume)
         wave.append(signal)
     wave = np.hstack(wave)

@@ -225,9 +225,10 @@ After training, he looks like below:
 
 ## q~~c~~oncert: Quantum Concert
 
-Let's listen to how our *qusicians* Alice, Bob, and Charlie would play the piano for *twinkle star*, using [qoncert.py](./qoncert.py) as follows:
+Let's listen to how our *qusicians* Alice, Bob, and Charlie would play the piano for *twinkle star*.
+Cour *qoncert* will be held by calling [qoncert.py](./qoncert.py) as follows (inviting a trained *qusician* model):
 ```bash
-python qoncert.py --load modes/RandomLayers_2_7.pkl
+python qoncert.py --load models/RandomLayers_2_7.pkl
 ```
 It saves **play.npy** and **play.wav** in default.
 How good are they?
@@ -247,14 +248,27 @@ How good are they?
 ![quitar](./images/guitar-g9261592a2_1920.jpg)
 -->
 
-Under development.
+Playing the guitar is similar but different from playing the piano. 
+How to associate qubits with 6 strings and fingering?
+Let's investigate it in detail someday, but for now let's just discuss different styles of **arpeggio** and **stroke** for playing the guitar.
+Let our *qianists* play the guitar as *quitarists*:
+```bash
+python qoncert.py --verb --load models/StronglyEntanglingLayers_64_7.pkl --sound acoustic --delay 3000 --stroke 2
+```
+Here, *quitarist*-Bob uses slow 2-stroke arpeggio. 
+Let's enjoy his *quitar* concert:
+- [Rapid stroke (delay=100, stroke=1)](./audios/guitar100_StronglyEntanglingLayers_64_7.mp4); umm, not impressive
+- [Slow stroke (delay=3000, stroke=1)](./audios/guitar3000_StronglyEntanglingLayers_64_7.mp4); sounds ok
+- [Long wrapped stroke (delay=8000, stroke=1)](./audios/guitar8000_StronglyEntanglingLayers_64_7.mp4); interesting
+- [Slow 2-stroke (delay=3000, stroke=2)](./audios/guitar3000x2_StronglyEntanglingLayers_64_7.mp4); feels good
+
+Could be improved by adding more variants of arpeggio.
 
 # Extensions
 
 In future, our *quantum musicians* may consider:
 - Volume
 - Tempo/Pitch
-- Arpeggio/Stroke
 - Trend of melody
 - Reinforcement learning with rewards by social audiences
 - ...
