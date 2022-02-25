@@ -75,7 +75,7 @@ A wrapper script [synth.py](synth.py) to generate wav files in Sounds directory,
 ```bash
 python synth.py --octaves 4 --notes C D E F G A B --sound piano acoustic
 ```
-We may hear a piano note like [C4.wav](./audios/C4.wav).
+We may hear a piano note like [C4.wav](./audios/C4.mp4).
 
 Sound checking with [twinkle.py](twinkle.py) as:
 ```bash
@@ -146,7 +146,7 @@ weights = qaestro.step(mis_finger, weights) # qaestro's guide
 
 ### q~~m~~usician-Alice (BasicEntanglerLayers):
 
-Let's see how *qusician*-Alice would be trained by our qaestro:
+Let's see how *qusician*-Alice would be trained by our *qaestro*:
 ```bash
 python qaestro.py --ansatz BasicEntanglerLayers --layers 2 7 --epoch 2000 --showfig
 ```
@@ -223,7 +223,7 @@ After training, he looks like below:
 
 ## q~~c~~oncert: Quantum Concert
 
-Let's listen to how our *qusician* Alice, Bob, and Charlie would play the piano.
+Let's listen to how our *qusicians* Alice, Bob, and Charlie would play the piano.
 ... Coming soon.
 
 
@@ -238,11 +238,12 @@ Under development.
 
 # Extensions
 
-Our *quantum musician* may consider if he feels good:
+In future, our *quantum musicians* may consider:
 - Volume
-- Tempo 
+- Tempo/Pitch
 - Arpeggio/Stroke
 - Trend of melody
+- Reinforcement learning with rewards by social audiences
 - ...
 
 # License
